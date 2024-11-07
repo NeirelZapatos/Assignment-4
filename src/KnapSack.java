@@ -101,78 +101,78 @@ public class KnapSack
 		}
 		speedup = (float)(BTTime == 0? 0 : 100.0 * (BFTime - BTTime) / (float)BFTime);
 		System.out.printf("\nSpeedup of BT relative to BF is"+speedup+"percent");
-
-		startTime = System.nanoTime();
-		BBSolver1.Solve(inst,BBSoln1);
-		elapsed = System.nanoTime()-startTime;
-		BBTime1 = (Long)(elapsed/1000000);
-
-		System.out.printf("\n\nSolved using Branch and Bound enumeration in "+BBTime1 +"ms Optimal value = "+ BBSoln1.GetValue());
-		if (itemCnt <= DefineConstants.MAX_SIZE_TO_PRINT)
-		{
-			BBSoln1.Print("BB-UB1 Solution");
-		}
-		if (BFSoln.equalsTo(BBSoln1))
-		{
-			System.out.print("\nSUCCESS: BF and BB-UB1 solutions match");
-		}
-		else
-		{
-			System.out.print("\nERROR: BF and BB-UB1 solutions mismatch");
-		}
-		speedup = (float)(BBTime1 == 0? 0 : 100.0 * (BFTime - BBTime1) / (float)BFTime);
-		System.out.printf("\nSpeedup of BB-UB1 relative to BF is"+speedup+"percent");
-		startTime = System.nanoTime();
-		BBSolver2.Solve(inst,BBSoln2);
-		elapsed = System.nanoTime()-startTime;
-		BBTime2 = (Long)(elapsed/1000000);
-
-		System.out.printf("\n\nSolved using Branch and Bound enumeration in "+BBTime2 +"ms Optimal value = "+ BBSoln1.GetValue());
-		if (itemCnt <= DefineConstants.MAX_SIZE_TO_PRINT)
-		{
-			BBSoln2.Print("BB-UB2 Solution");
-		}
-		if (BFSoln.equalsTo(BBSoln2))
-		{
-			System.out.print("\nSUCCESS: BF and BB-UB2 solutions match");
-		}
-		else
-		{
-			System.out.print("\nERROR: BF and BB-UB2 solutions mismatch");
-		}
-		speedup = (float)(BBTime2 == 0? 0 : 100.0 * (BFTime - BBTime2) / (float)BFTime);
-		System.out.printf("\nSpeedup of BB-UB2 relative to BF is"+speedup+"percent");
-
-		startTime = System.nanoTime();
-		BBSolver3.Solve(inst,BBSoln3);
-		elapsed = System.nanoTime()-startTime;
-		BBTime3 = (Long)(elapsed/1000000);
-
-		System.out.printf("\n\nSolved using Branch and Bound enumeration in "+BBTime3 +"ms Optimal value = "+ BBSoln1.GetValue());
-		if (itemCnt <= DefineConstants.MAX_SIZE_TO_PRINT)
-		{
-			BBSoln3.Print("BB-UB3 Solution");
-		}
-		if (BFSoln.equalsTo(BBSoln3))
-		{
-			System.out.print("\nSUCCESS: BF and BB-UB3 solutions match");
-		}
-		else
-		{
-			System.out.print("\nERROR: BF and BB-UB3 solutions mismatch");
-		}
-		speedup = (float)(BBTime3 == 0? 0 : 100.0 * (BFTime - BBTime3) / (float)BFTime);
-		System.out.printf("\nSpeedup of BB-UB3 relative to BF is"+speedup+"percent");
-
-		inst = null;
-		DPSoln = null;
-		BFSoln = null;
-		BTSoln = null;
-		BBSoln1 = null;
-		BBSoln2 = null;
-		BBSoln3 = null;
-
-		System.out.print("\n\nProgram Completed Successfully\n");
-
+//
+//		startTime = System.nanoTime();
+//		BBSolver1.Solve(inst,BBSoln1);
+//		elapsed = System.nanoTime()-startTime;
+//		BBTime1 = (Long)(elapsed/1000000);
+//
+//		System.out.printf("\n\nSolved using Branch and Bound enumeration in "+BBTime1 +"ms Optimal value = "+ BBSoln1.GetValue());
+//		if (itemCnt <= DefineConstants.MAX_SIZE_TO_PRINT)
+//		{
+//			BBSoln1.Print("BB-UB1 Solution");
+//		}
+//		if (BFSoln.equalsTo(BBSoln1))
+//		{
+//			System.out.print("\nSUCCESS: BF and BB-UB1 solutions match");
+//		}
+//		else
+//		{
+//			System.out.print("\nERROR: BF and BB-UB1 solutions mismatch");
+//		}
+//		speedup = (float)(BBTime1 == 0? 0 : 100.0 * (BFTime - BBTime1) / (float)BFTime);
+//		System.out.printf("\nSpeedup of BB-UB1 relative to BF is"+speedup+"percent");
+//		startTime = System.nanoTime();
+//		BBSolver2.Solve(inst,BBSoln2);
+//		elapsed = System.nanoTime()-startTime;
+//		BBTime2 = (Long)(elapsed/1000000);
+//
+//		System.out.printf("\n\nSolved using Branch and Bound enumeration in "+BBTime2 +"ms Optimal value = "+ BBSoln1.GetValue());
+//		if (itemCnt <= DefineConstants.MAX_SIZE_TO_PRINT)
+//		{
+//			BBSoln2.Print("BB-UB2 Solution");
+//		}
+//		if (BFSoln.equalsTo(BBSoln2))
+//		{
+//			System.out.print("\nSUCCESS: BF and BB-UB2 solutions match");
+//		}
+//		else
+//		{
+//			System.out.print("\nERROR: BF and BB-UB2 solutions mismatch");
+//		}
+//		speedup = (float)(BBTime2 == 0? 0 : 100.0 * (BFTime - BBTime2) / (float)BFTime);
+//		System.out.printf("\nSpeedup of BB-UB2 relative to BF is"+speedup+"percent");
+//
+//		startTime = System.nanoTime();
+//		BBSolver3.Solve(inst,BBSoln3);
+//		elapsed = System.nanoTime()-startTime;
+//		BBTime3 = (Long)(elapsed/1000000);
+//
+//		System.out.printf("\n\nSolved using Branch and Bound enumeration in "+BBTime3 +"ms Optimal value = "+ BBSoln1.GetValue());
+//		if (itemCnt <= DefineConstants.MAX_SIZE_TO_PRINT)
+//		{
+//			BBSoln3.Print("BB-UB3 Solution");
+//		}
+//		if (BFSoln.equalsTo(BBSoln3))
+//		{
+//			System.out.print("\nSUCCESS: BF and BB-UB3 solutions match");
+//		}
+//		else
+//		{
+//			System.out.print("\nERROR: BF and BB-UB3 solutions mismatch");
+//		}
+//		speedup = (float)(BBTime3 == 0? 0 : 100.0 * (BFTime - BBTime3) / (float)BFTime);
+//		System.out.printf("\nSpeedup of BB-UB3 relative to BF is"+speedup+"percent");
+//
+//		inst = null;
+//		DPSoln = null;
+//		BFSoln = null;
+//		BTSoln = null;
+//		BBSoln1 = null;
+//		BBSoln2 = null;
+//		BBSoln3 = null;
+//
+//		System.out.print("\n\nProgram Completed Successfully\n");
+//
 	}
 }

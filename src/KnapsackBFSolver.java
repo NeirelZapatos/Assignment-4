@@ -21,11 +21,12 @@ public class KnapsackBFSolver implements java.io.Closeable
 		crntSoln.TakeItem(itemNum);
 		FindSolns(itemNum + 1);
 	}
+
 	public void CheckCrntSoln()
 	{
 		int crntVal = crntSoln.ComputeValue();
-		System.out.print("\nChecking solution ");
-		crntSoln.Print(" ");
+//		System.out.print("\nChecking solution ");
+//		crntSoln.Print(" ");
 
 		if (crntVal == DefineConstants.INVALID_VALUE)
 		{
@@ -49,6 +50,7 @@ public class KnapsackBFSolver implements java.io.Closeable
 	{
 		crntSoln = null;
 	}
+
 	public void close()
 	{
 		if (crntSoln != null)
@@ -56,6 +58,7 @@ public class KnapsackBFSolver implements java.io.Closeable
 			crntSoln = null;
 		}
 	}
+
 	public void Solve(KnapsackInstance inst_, KnapsackSolution soln_)
 	{
 		inst = inst_;

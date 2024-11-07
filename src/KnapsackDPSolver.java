@@ -1,5 +1,3 @@
-import java.util.*;
-
 // Dynamic programming solver
 public class KnapsackDPSolver implements java.io.Closeable
 {
@@ -10,10 +8,12 @@ public class KnapsackDPSolver implements java.io.Closeable
 	{
     
 	}
+
 	public void close()
 	{
-    
+
 	}
+
 	public void Solve(KnapsackInstance inst_, KnapsackSolution soln_)
 	{
 		inst = inst_;
@@ -31,18 +31,30 @@ public class KnapsackDPSolver implements java.io.Closeable
 			for(int j = 1; j <= inst.GetCapacity(); j++) {
 				if(j < inst.GetItemWeight(i)) {
 					table[i][j] = table[i - 1][j];
-//					soln.DontTakeItem(i);
 				}
 				else {
 					if((inst.GetItemValue(i) + table[i - 1][j - inst.GetItemWeight(i)]) < table[i - 1][j]) {
 						table[i][j] = table[i - 1][j];
-						soln.DontTakeItem(i);
 					}
 					else {
 						table[i][j] = inst.GetItemValue(i) + table[i - 1][j - inst.GetItemWeight(i)];
-						soln.TakeItem(i);
 					}
 				}
+			}
+		}
+
+//		for(int i = 0; i < table.length; i++) {
+//			for(int j = 0; j < table[i].length; j++) {
+//				System.out.print(table[i][j] + "\t");  // Use tab for better alignment
+//			}
+//			System.out.println();  // Newline after each row
+//		}
+
+		int column = inst.GetCapacity();
+		for(int row = inst.GetItemCnt(); row >= 1; row--) {
+			if(table[row][column] > table[row - 1][column]) {
+				soln.TakeItem(row);
+				column -= inst.GetItemWeight(row);
 			}
 		}
 
