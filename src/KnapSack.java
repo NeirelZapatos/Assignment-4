@@ -100,7 +100,7 @@ public class KnapSack
 			System.out.print("\nERROR: BF and BT solutions mismatch");
 		}
 		speedup = (float)(BTTime == 0? 0 : 100.0 * (BFTime - BTTime) / (float)BFTime);
-		System.out.printf("\nSpeedup of BT relative to BF is"+speedup+"percent");
+		System.out.printf("\nSpeedup of BT relative to BF is "+speedup+" percent");
 //
 //		startTime = System.nanoTime();
 //		BBSolver1.Solve(inst,BBSoln1);

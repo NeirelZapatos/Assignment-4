@@ -6,7 +6,7 @@ public class KnapsackBTSolver extends KnapsackBFSolver
 	protected KnapsackInstance inst;
 	protected KnapsackSolution crntSoln;
 	protected KnapsackSolution bestSoln;
-	private int currentLoad = 0;
+//	private int currentLoad = 0;
 
 	public KnapsackBTSolver()
 	{
@@ -23,28 +23,29 @@ public class KnapsackBTSolver extends KnapsackBFSolver
 		inst = inst_;
 		bestSoln = soln_;
 		crntSoln = new KnapsackSolution(inst);
-		FindSolns(1);
+		FindSolns(1, 0);
+		bestSoln.ComputeValue();
 	}
 
-	public void FindSolns(int itemNum)
+	public void FindSolns(int itemNum, int currentLoad)
 	{
 		int itemCnt = inst.GetItemCnt();
-
-		if((currentLoad + inst.GetItemWeight(itemNum)) > inst.GetCapacity()) {
-			return;
-		}
-
-		currentLoad += inst.GetItemWeight(itemNum);
 
 		if(itemNum == itemCnt + 1)
 		{
 			CheckCrntSoln();
 			return;
 		}
+
 		crntSoln.DontTakeItem(itemNum);
-		FindSolns(itemNum + 1);
+		FindSolns(itemNum + 1, currentLoad);
+
+		if((currentLoad + inst.GetItemWeight(itemNum)) > inst.GetCapacity()) {
+			return;
+		}
+
 		crntSoln.TakeItem(itemNum);
-		FindSolns(itemNum + 1);
+		FindSolns(itemNum + 1, currentLoad + inst.GetItemWeight(itemNum));
 	}
 
 	public void CheckCrntSoln()
