@@ -142,7 +142,7 @@ public class KnapSack
 		}
 		speedup = (float)(BBTime2 == 0? 0 : 100.0 * (BFTime - BBTime2) / (float)BFTime);
 		System.out.printf("\nSpeedup of BB-UB2 relative to BF is "+speedup+" percent");
-//
+
 //		startTime = System.nanoTime();
 //		BBSolver3.Solve(inst,BBSoln3);
 //		elapsed = System.nanoTime()-startTime;
@@ -173,6 +173,5 @@ public class KnapSack
 //		BBSoln3 = null;
 //
 //		System.out.print("\n\nProgram Completed Successfully\n");
-//
 	}
 }

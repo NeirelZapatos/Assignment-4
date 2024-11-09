@@ -4,6 +4,7 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 {
 	protected UPPER_BOUND ub;
 	private int ubType;
+//	private int nodeCount = 0;
 
 	public KnapsackBBSolver(UPPER_BOUND ub_)
 	{
@@ -13,7 +14,10 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 
 	public void close()
 	{
-    
+		if (crntSoln != null)
+		{
+			crntSoln = null;
+		}
 	}
 
 	public void Solve(KnapsackInstance inst_, KnapsackSolution soln_)
@@ -28,8 +32,12 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 
 		if(ubType == 0) {
 			FindSolnsUB1(1, totalValue);
+//			System.out.println(nodeCount);
+
 		} else if (ubType == 1) {
 			FindSolnsUB2(1, 0, 0);
+//			System.out.println(nodeCount);
+
 		} else {
 			FindSolnsUB3(1, 0, totalValue);
 		}
@@ -38,6 +46,7 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 
 	public void FindSolnsUB1(int itemNum, int totalValue)
 	{
+//		nodeCount++;
 		int itemCnt = inst.GetItemCnt();
 
 		if (itemNum == itemCnt + 1)
@@ -59,6 +68,7 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 
 	public void FindSolnsUB2(int itemNum, int takenWeights, int takenValue)
 	{
+//		nodeCount++;
 		int itemCnt = inst.GetItemCnt();
 
 		if (itemNum == itemCnt + 1)
@@ -70,8 +80,8 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 		int testValue = takenValue;
 		int remainingCap = inst.GetCapacity() - takenWeights;
 		for(int i = itemNum; i <= inst.GetItemCnt(); i++) {
-			if(inst.GetItemWeight(itemNum) <= remainingCap) {
-				testValue += inst.GetItemValue(itemNum);
+			if(inst.GetItemWeight(i) <= remainingCap) {
+				testValue += inst.GetItemValue(i);
 			}
 		}
 

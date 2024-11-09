@@ -6,9 +6,11 @@ public class KnapsackBFSolver implements java.io.Closeable
 	protected KnapsackInstance inst;
 	protected KnapsackSolution crntSoln;
 	protected KnapsackSolution bestSoln;
+//	private int nodeCount = 0;
 
 	public void FindSolns(int itemNum)
 	{
+//		nodeCount++;
 		int itemCnt = inst.GetItemCnt();
     
 		if (itemNum == itemCnt + 1)
@@ -24,6 +26,7 @@ public class KnapsackBFSolver implements java.io.Closeable
 
 	public void CheckCrntSoln()
 	{
+
 		int crntVal = crntSoln.ComputeValue();
 //		System.out.print("\nChecking solution ");
 //		crntSoln.Print(" ");
@@ -65,5 +68,6 @@ public class KnapsackBFSolver implements java.io.Closeable
 		bestSoln = soln_;
 		crntSoln = new KnapsackSolution(inst);
 		FindSolns(1);
+//		System.out.println(nodeCount);
 	}
 }

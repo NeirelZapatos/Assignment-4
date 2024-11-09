@@ -7,6 +7,7 @@ public class KnapsackBTSolver extends KnapsackBFSolver
 	protected KnapsackSolution crntSoln;
 	protected KnapsackSolution bestSoln;
 //	private int currentLoad = 0;
+//	private int nodeCount = 0;
 
 	public KnapsackBTSolver()
 	{
@@ -15,7 +16,10 @@ public class KnapsackBTSolver extends KnapsackBFSolver
 
 	public void close()
 	{
-
+		if (crntSoln != null)
+		{
+			crntSoln = null;
+		}
 	}
 
 	public void Solve(KnapsackInstance inst_, KnapsackSolution soln_)
@@ -25,10 +29,12 @@ public class KnapsackBTSolver extends KnapsackBFSolver
 		crntSoln = new KnapsackSolution(inst);
 		FindSolns(1, 0);
 		bestSoln.ComputeValue();
+//		System.out.println(nodeCount);
 	}
 
 	public void FindSolns(int itemNum, int currentLoad)
 	{
+//		nodeCount++;
 		int itemCnt = inst.GetItemCnt();
 
 		if(itemNum == itemCnt + 1)

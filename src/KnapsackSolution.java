@@ -89,7 +89,11 @@ public class KnapsackSolution implements java.io.Closeable
 	}
 	public boolean equalsTo (KnapsackSolution otherSoln)
 	{
+//		System.out.println();
+//		System.out.println("BF: " + value);
+//		System.out.println("BB2: " + otherSoln.value);
 		return value == otherSoln.value;
+
 	}
 	
 	public void dispose()

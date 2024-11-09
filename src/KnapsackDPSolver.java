@@ -11,7 +11,10 @@ public class KnapsackDPSolver implements java.io.Closeable
 
 	public void close()
 	{
-
+		if (soln != null)
+		{
+			soln = null;
+		}
 	}
 
 	public void Solve(KnapsackInstance inst_, KnapsackSolution soln_)
