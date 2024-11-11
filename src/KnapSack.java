@@ -143,35 +143,35 @@ public class KnapSack
 		speedup = (float)(BBTime2 == 0? 0 : 100.0 * (BFTime - BBTime2) / (float)BFTime);
 		System.out.printf("\nSpeedup of BB-UB2 relative to BF is "+speedup+" percent");
 
-//		startTime = System.nanoTime();
-//		BBSolver3.Solve(inst,BBSoln3);
-//		elapsed = System.nanoTime()-startTime;
-//		BBTime3 = (Long)(elapsed/1000000);
-//
-//		System.out.printf("\n\nSolved using Branch and Bound enumeration in "+BBTime3 +"ms Optimal value = "+ BBSoln1.GetValue());
-//		if (itemCnt <= DefineConstants.MAX_SIZE_TO_PRINT)
-//		{
-//			BBSoln3.Print("BB-UB3 Solution");
-//		}
-//		if (BFSoln.equalsTo(BBSoln3))
-//		{
-//			System.out.print("\nSUCCESS: BF and BB-UB3 solutions match");
-//		}
-//		else
-//		{
-//			System.out.print("\nERROR: BF and BB-UB3 solutions mismatch");
-//		}
-//		speedup = (float)(BBTime3 == 0? 0 : 100.0 * (BFTime - BBTime3) / (float)BFTime);
-//		System.out.printf("\nSpeedup of BB-UB3 relative to BF is"+speedup+"percent");
-//
-//		inst = null;
-//		DPSoln = null;
-//		BFSoln = null;
-//		BTSoln = null;
-//		BBSoln1 = null;
-//		BBSoln2 = null;
-//		BBSoln3 = null;
-//
-//		System.out.print("\n\nProgram Completed Successfully\n");
+		startTime = System.nanoTime();
+		BBSolver3.Solve(inst,BBSoln3);
+		elapsed = System.nanoTime()-startTime;
+		BBTime3 = (Long)(elapsed/1000000);
+
+		System.out.printf("\n\nSolved using Branch and Bound enumeration in "+BBTime3 +"ms Optimal value = "+ BBSoln1.GetValue());
+		if (itemCnt <= DefineConstants.MAX_SIZE_TO_PRINT)
+		{
+			BBSoln3.Print("BB-UB3 Solution");
+		}
+		if (BFSoln.equalsTo(BBSoln3))
+		{
+			System.out.print("\nSUCCESS: BF and BB-UB3 solutions match");
+		}
+		else
+		{
+			System.out.print("\nERROR: BF and BB-UB3 solutions mismatch");
+		}
+		speedup = (float)(BBTime3 == 0? 0 : 100.0 * (BFTime - BBTime3) / (float)BFTime);
+		System.out.printf("\nSpeedup of BB-UB3 relative to BF is "+speedup+" percent");
+
+		inst = null;
+		DPSoln = null;
+		BFSoln = null;
+		BTSoln = null;
+		BBSoln1 = null;
+		BBSoln2 = null;
+		BBSoln3 = null;
+
+		System.out.print("\n\nProgram Completed Successfully\n");
 	}
 }

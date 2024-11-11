@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
 
 // Branch-and-Bound solver
 public class KnapsackBBSolver extends KnapsackBFSolver
@@ -25,21 +28,28 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 		inst = inst_;
 		bestSoln = soln_;
 		crntSoln = new KnapsackSolution(inst);
-		int totalValue = 0;
-		for(int i = 1; i <= inst.GetItemCnt(); i++) {
-			totalValue += inst.GetItemValue(i);
-		}
 
 		if(ubType == 0) {
+			int totalValue = 0;
+			for(int i = 1; i <= inst.GetItemCnt(); i++) {
+				totalValue += inst.GetItemValue(i);
+			}
+
 			FindSolnsUB1(1, totalValue);
 //			System.out.println(nodeCount);
-
 		} else if (ubType == 1) {
 			FindSolnsUB2(1, 0, 0);
 //			System.out.println(nodeCount);
-
 		} else {
-			FindSolnsUB3(1, 0, totalValue);
+			Item[] items = new Item[inst.GetItemCnt()];
+			for(int i = 0; i < inst.GetItemCnt(); i++) {
+				items[i] = new Item(inst.GetItemValue(i + 1), inst.GetItemWeight(i + 1));
+			}
+//
+			Arrays.sort(items, (a, b) -> Double.compare(b.valuePerWeight, a.valuePerWeight));
+//
+//			FindSolnsUB3(1, 0, 0, items);
+			FindSolnsUB3(1, 0, 0 , items);
 		}
 
 	}
@@ -55,7 +65,7 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 			return;
 		}
 
-		if(totalValue < bestSoln.GetValue()) {
+		if(totalValue <= bestSoln.GetValue()) {
 			return;
 		}
 
@@ -79,13 +89,13 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 
 		int testValue = takenValue;
 		int remainingCap = inst.GetCapacity() - takenWeights;
-		for(int i = itemNum; i <= inst.GetItemCnt(); i++) {
+		for(int i = itemNum; i <= itemCnt; i++) {
 			if(inst.GetItemWeight(i) <= remainingCap) {
 				testValue += inst.GetItemValue(i);
 			}
 		}
 
-		if(testValue < bestSoln.GetValue()) {
+		if(testValue <= bestSoln.GetValue()) {
 			return;
 		}
 
@@ -96,7 +106,7 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 		FindSolnsUB2(itemNum + 1, takenWeights + inst.GetItemWeight(itemNum), takenValue + inst.GetItemValue(itemNum));
 	}
 
-	public void FindSolnsUB3(int itemNum, int takenWeights, int totalValue)
+	public void FindSolnsUB3(int itemNum, int takenWeights, double takenValue, Item[] items)
 	{
 		int itemCnt = inst.GetItemCnt();
 
@@ -106,11 +116,42 @@ public class KnapsackBBSolver extends KnapsackBFSolver
 			return;
 		}
 
+		double fracVal = takenValue;
+		int fracWeight = takenWeights;
+		for(int i = itemNum; i <= itemCnt; i++) {
+			if(items[i - 1].weight <= (inst.GetCapacity() - fracWeight)) {
+				fracVal += items[i - 1].value;
+				fracWeight += items[i - 1].weight;
+			} else {
+				fracVal += items[i - 1].valuePerWeight * (inst.GetCapacity() - fracWeight);
+//				fracWeight += inst.GetCapacity();
+				break;
+			}
+		}
+
+//		for(int i = itemNum; i <= itemCnt; i++) {
+//			if(fracWeight > inst.GetCapacity()) {
+//				break;
+//			}
+//			if(inst.GetItemWeight(i) <= (inst.GetCapacity() - fracWeight)) {
+//				fracVal += inst.GetItemValue(i);
+//				fracWeight += inst.GetItemWeight(i);
+//			} else {
+//				fracVal += ((double) inst.GetItemValue(i) / inst.GetItemWeight(i)) * (inst.GetCapacity() - fracWeight);
+////				fracWeight += inst.GetCapacity();
+//				break;
+//			}
+//		}
+
+		if(fracVal <= bestSoln.GetValue()) {
+			return;
+		}
+
 		crntSoln.DontTakeItem(itemNum);
-		FindSolnsUB3(itemNum + 1, takenWeights, totalValue);
+		FindSolnsUB3(itemNum + 1, takenWeights, takenValue, items);
 
 		crntSoln.TakeItem(itemNum);
-		FindSolnsUB3(itemNum + 1, takenWeights + inst.GetItemWeight(itemNum), totalValue);
+		FindSolnsUB3(itemNum + 1, takenWeights + items[itemNum - 1].weight, takenValue + items[itemNum - 1].value, items);
 	}
 
 	public void CheckCrntSoln()
